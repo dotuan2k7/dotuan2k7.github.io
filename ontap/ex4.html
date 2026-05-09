@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ex4</title>
+</head>
+<body>
+    <h2> Appetizers &reg</h2>
+    <div class="menu-item veg">Salad - &ge; $5</div>
+    <div class="menu-item non-veg">Chicken Wings - &ge; $8</div>
+    <h2>Main Course &sect;</h2>
+    <div class="menu-item non-veg">Beef Steak - &ge; $25</div>
+    <div class="menu-item veg">Tofu Stir Fry - &ge; $15
+    <h2>Desserts</h2>
+    <div class="menu-item veg">Ice Cream - &ge; $4</div>
+    <h2>Drinks</h2>
+    <div class="menu-item veg">Apple Juice - &ge; $3</div>
+    <br>
+    <button onclick="filterMenu()">Filter Menu (Vegetarian Only)</button>
+</body>
+<script>
+    var showingAll = false;
+    function filterMenu() {
+        var meatDishes = document.getElementsByClassName("menu-item non-veg");
+        
+        for (var i = 0; i < meatDishes.length; i++) {
+            if (showingAll) {
+                meatDishes[i].style.display = "none";
+            } else {
+                meatDishes[i].style.display = "block";
+            }
+        }
+        showingAll = !showingAll;
+    }
+</script>
+</body>
+</html>

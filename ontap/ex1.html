@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* 3. Style form with Flexbox layout */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- 1. Include fields -->
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" id="username" placeholder="5-15 characters">
+        </div>
+        
+        <div class="form-group">
+            <label>Password:</label>
+            <!-- 4. Updates in real-time as user types (onkeyup) -->
+            <input type="password" id="password" onkeyup="checkPasswordStrength()">
+            <small id="strength-indicator">Strength: </small>
+        </div>
+
+        <div class="form-group">
+            <label>Profile Picture (JPG/PNG):</label>
+            <input type="file" id="profilePic" accept=".jpg, .jpeg, .png">
+        </div>
+
+        <button onclick="validateForm()">Register</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // 4. Password strength indicator
+        function checkPasswordStrength() {
+            let pass = document.getElementById("password").value;
+            let indicator = document.getElementById("strength-indicator");
+            let hasLetter = /[a-zA-Z]/.test(pass);
+            let hasNumber = /[0-9]/.test(pass);
+
+            if (pass.length === 0) {
+                indicator.innerText = "Strength: ";
+                indicator.style.color = "black";
+            } else if (pass.length < 6 || (!hasLetter || !hasNumber)) {
+                indicator.innerText = "Strength: Weak";
+                indicator.style.color = "red";
+            } else if (pass.length >= 6 && hasLetter && hasNumber && pass.length < 10) {
+                indicator.innerText = "Strength: Medium";
+                indicator.style.color = "orange";
+            } else {
+                indicator.innerText = "Strength: Strong";
+                indicator.style.color = "green";
+            }
+        }
+
+        // 2. Add validation rules
+        function validateForm() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+            let pic = document.getElementById("profilePic").value;
+            let msg = document.getElementById("message");
+
+            let hasLetter = /[a-zA-Z]/.test(pass);
+            let hasNumber = /[0-9]/.test(pass);
+
+            if (user.length < 5 || user.length > 15) {
+                msg.innerText = "Error: Username must be 5-15 characters.";
+                return;
+            }
+            if (!hasLetter || !hasNumber) {
+                msg.innerText = "Error: Password must contain numbers and letters.";
+                return;
+            }
+            if (!pic.toLowerCase().endsWith('.jpg') && !pic.toLowerCase().endsWith('.png') && !pic.toLowerCase().endsWith('.jpeg')) {
+                msg.innerText = "Error: Image file must be JPG or PNG.";
+                return;
+            }
+            msg.innerText = "Registration Successful!";
+            msg.style.color = "green";
+        }
+    </script>
+</body>
+</html>
