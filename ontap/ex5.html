@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <style>
+        .tab-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .tab { padding: 10px 20px; cursor: pointer; border: 1px solid #ccc; background-color: #eee; }
+        .tab.active { background-color: #007bff; color: white; font-weight: bold; }
+        
+        .tab-content { display: none; padding: 20px; border: 1px solid #ccc; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="tab-buttons">
+        <div class="tab active" onclick="switchTab(0)">Features &reg; &rarr;</div>
+        <div class="tab" onclick="switchTab(1)">Pricing &euro; &rarr;</div>
+        <div class="tab" onclick="switchTab(2)">Reviews &rarr;</div>
+        <div class="tab" onclick="switchTab(3)">Support &rarr;</div>
+    </div>
+    <div class="tab-content active">Here are our Features...</div>
+    <div class="tab-content">Our Pricing plans...</div>
+    <div class="tab-content">Read user Reviews...</div>
+    <div class="tab-content">Get Support here...</div>
+    <script>
+        function switchTab(index) {
+            var tabs = document.querySelectorAll(".tab");
+            var contents = document.querySelectorAll(".tab-content");   
+            for (var i=0; i<tabs.length; i++)
+        {
+                tabs[i].classList.remove("active");
+                contents[i].classList.remove("active");
+            }
+            tabs[index].classList.add("active");
+            contents[index].classList.add("active");    
+        }
+    </script>
+</body>
+</html>
