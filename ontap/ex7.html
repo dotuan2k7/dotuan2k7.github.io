@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html>
-<body>
-    <form id="contactForm" style="border:1px solid #000; padding:20px; width:250px;">
-        <label>Name:</label><input type="text" class="field"><br>
-        <label>Email:</label><input type="email" class="field"><br>
-        <label>Msg:</label><textarea class="field"></textarea><br>
-        <button type="button" onclick="checkForm()">Submit</button>
-    </form>
-    <script>
-        function checkForm() {
-
-    // Lấy tất cả ô có class "field"
-    let fields = document.querySelectorAll('.field');
-
-    // Biến kiểm tra xem có ô nào bị trống không
-    let empty = false;
-
-    // Duyệt từng ô input
-    fields.forEach(function(f) {
-
-        // Nếu ô đang rỗng
-        if (f.value === "") {
-
-            // Đánh dấu là có ô trống
-            empty = true;
+<head>
+    <style>
+        /* Yêu cầu 3: Tạo viền (border) và khoảng cách (padding, margin) */
+        .khung-form {
+            border: 2px solid black; 
+            padding: 15px; 
+            width: 300px;
         }
-    });
+        .o-nhap {
+            width: 100%;
+            margin-bottom: 10px; /* Đẩy các ô cách nhau ra 1 chút */
+        }
+    </style>
+</head>
+<body>
+    <div class="khung-form">
+        <label>Họ và Tên:</label>
+        <input type="text" id="ten" class="o-nhap">
 
-    // Nếu có ô trống
-    if (empty) {
+        <label>Email:</label>
+        <input type="email" id="email" class="o-nhap">
 
-        alert("Please fill all fields");
+        <label>Tin nhắn:</label>
+        <textarea id="tin_nhan" class="o-nhap" rows="3"></textarea>
 
-    } else {
+        <button onclick="kiemTraLoi()">Gửi liên hệ</button>
+        
+        <p id="thong_bao"></p> 
+    </div>
 
-        // Nếu nhập đầy đủ
-        alert("Success!");
-    }
-}
+    <script>
+        // Yêu cầu 4: Hàm kiểm tra ô trống
+        function kiemTraLoi() {
+            // Bước 1: Gom hết chữ người dùng nhập vào
+            let t = document.getElementById("ten").value;
+            let e = document.getElementById("email").value;
+            let tn = document.getElementById("tin_nhan").value;
+            let tb = document.getElementById("thong_bao");
+
+            // Bước 2: Kiểm tra. Dấu == "" nghĩa là Rỗng (không gõ gì cả)
+            // Dấu || nghĩa là HOẶC
+            if (t == "" || e == "" || tn == "") {
+                tb.innerText = "Lỗi: Vui lòng điền kín tất cả các ô!";
+                tb.style.color = "red";
+            } else {
+                tb.innerText = "Thành công: Đã gửi tin nhắn!";
+                tb.style.color = "green";
+            }
+        }
     </script>
 </body>
 </html>

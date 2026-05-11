@@ -1,36 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>#news { display: grid; gap: 10px; width: 300px; }</style>
+    <style>
+        /* Yêu cầu 3: Bố cục lưới CSS Grid. 
+           Chia 2 cột: Cột chữ bên trái (1 phần), cột nhập bên phải (2 phần) */
+        .khung-luoi {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 15px;
+            width: 400px;
+            border: 1px solid black;
+            padding: 15px;
+        }
+        
+        /* Class này để làm cho Nút bấm và Dòng thông báo trải dài hết 2 cột */
+        .trai-dai {
+            grid-column: 1 / span 2;
+        }
+    </style>
 </head>
 <body>
-    <form id="news">
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <div><input type="radio" name="t" checked> Monthly <input type="radio" name="t"> Yearly</div>
-        <div><input type="checkbox" class="int"> Tech <input type="checkbox" class="int"> Music</div>
-        <button type="button" onclick="sub()">Subscribe</button>
-    </form>
+    <div class="khung-luoi">
+        <label>Họ và Tên:</label>
+        <input type="text" id="ten">
+
+        <label>Email:</label>
+        <input type="text" id="email">
+
+        <label>Gói đăng ký:</label>
+        <div>
+            <input type="radio" name="goi" checked> Theo tháng 
+            <input type="radio" name="goi"> Theo năm
+        </div>
+
+        <label>Sở thích:</label>
+        <div>
+            <input type="checkbox" class="so-thich"> Thể thao
+            <input type="checkbox" class="so-thich"> Công nghệ
+            <input type="checkbox" class="so-thich"> Nghệ thuật
+        </div>
+
+        <button class="trai-dai" onclick="dangKy()">Đăng ký</button>
+        
+        <b id="thong_bao" class="trai-dai"></b>
+    </div>
+
     <script>
-        function sub() {
+        function dangKy() {
+            // 1. Lấy dữ liệu Email (1 cái)
+            let e = document.getElementById("email").value;
+            let tb = document.getElementById("thong_bao");
 
-    // Lấy email người dùng nhập
-    let email = document.getElementById("email").value;
+            // 2. Lấy dữ liệu Sở thích (1 đống)
+            let dsSoThich = document.querySelectorAll(".so-thich");
+            
+            // Tạo 1 biến làm "người gác cổng" xem có ai tích vào ô nào chưa
+            let coChon = false; 
 
-    // Đếm số checkbox được tick
-    let interests = document.querySelectorAll(".int:checked").length;
+            // Chạy VÒNG LẶP kiểm tra từng ô checkbox
+            for (let i = 0; i < dsSoThich.length; i++) {
+                // Thuộc tính .checked dùng để xem ô đó có được tích chữ V không
+                if (dsSoThich[i].checked == true) {
+                    coChon = true; // Chỉ cần 1 ô được tích là đổi trạng thái ngay
+                }
+            }
 
-    // Kiểm tra email có chứa @ không
-    // Và có chọn ít nhất 1 sở thích không
-    if (email.includes("@") && interests > 0) {
-
-        alert("Valid!");
-
-    } else {
-
-        alert("Check email and interests!");
-    }
-}
+            // 3. Xét duyệt (Yêu cầu 2 & 4)
+            // Lệnh .includes("chữ") nghĩa là "Có chứa"
+            if (e.includes("@") == false || e.includes(".") == false) {
+                tb.innerText = "Lỗi: Email bắt buộc phải có @ và dấu chấm!";
+                tb.style.color = "red";
+            } 
+            else if (coChon == false) {
+                tb.innerText = "Lỗi: Bạn phải chọn ít nhất 1 sở thích!";
+                tb.style.color = "red";
+            } 
+            else {
+                tb.innerText = "Thành công: Đăng ký hoàn tất!";
+                tb.style.color = "green";
+            }
+        }
     </script>
 </body>
 </html>
