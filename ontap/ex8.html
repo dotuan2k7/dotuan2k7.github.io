@@ -13,11 +13,24 @@
     </form>
     <script>
         function sub() {
-            let e = document.getElementById('email').value;
-            let i = document.querySelectorAll('.int:checked').length;
-            if(e.includes('@') && i > 0) alert("Valid!");
-            else alert("Check email and interests!");
-        }
+
+    // Lấy email người dùng nhập
+    let email = document.getElementById("email").value;
+
+    // Đếm số checkbox được tick
+    let interests = document.querySelectorAll(".int:checked").length;
+
+    // Kiểm tra email có chứa @ không
+    // Và có chọn ít nhất 1 sở thích không
+    if (email.includes("@") && interests > 0) {
+
+        alert("Valid!");
+
+    } else {
+
+        alert("Check email and interests!");
+    }
+}
     </script>
 </body>
 </html>
