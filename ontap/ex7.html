@@ -9,11 +9,35 @@
     </form>
     <script>
         function checkForm() {
-            let fields = document.querySelectorAll('.field');
-            let empty = false;
-            fields.forEach(f => { if(f.value === "") empty = true; });
-            alert(empty ? "Please fill all fields" : "Success!");
+
+    // Lấy tất cả ô có class "field"
+    let fields = document.querySelectorAll('.field');
+
+    // Biến kiểm tra xem có ô nào bị trống không
+    let empty = false;
+
+    // Duyệt từng ô input
+    fields.forEach(function(f) {
+
+        // Nếu ô đang rỗng
+        if (f.value === "") {
+
+            // Đánh dấu là có ô trống
+            empty = true;
         }
+    });
+
+    // Nếu có ô trống
+    if (empty) {
+
+        alert("Please fill all fields");
+
+    } else {
+
+        // Nếu nhập đầy đủ
+        alert("Success!");
+    }
+}
     </script>
 </body>
 </html>

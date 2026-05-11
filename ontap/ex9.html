@@ -15,8 +15,14 @@
     <button onclick="togglePrice()">Toggle Price</button>
     <script>
         function togglePrice() {
-            let ps = document.getElementsByClassName('price');
-            for(let p of ps) p.style.display = (p.style.display === 'none') ? 'block' : 'none';
+            var ps = document.getElementsByClassName('price');
+            for(var i = 0; i < ps.length; i++) {
+           if (ps[i].style.display === "none") {
+                ps[i].style.display = "block";
+           } else {
+                ps[i].style.display = "none";
+           }     
+            }
         }
     </script>
 </body>
